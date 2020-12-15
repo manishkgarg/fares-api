@@ -26,7 +26,7 @@ public class Embedded {
 	@JsonProperty("locations")
 	private List<Location> locations = null;
 	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private Map<String, Object> additionalProperties = new HashMap<>();
 
 	@JsonProperty("locations")
 	public List<Location> getLocations() {

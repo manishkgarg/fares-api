@@ -27,7 +27,7 @@ public class Coordinates {
 	@JsonProperty("longitude")
 	private Double longitude;
 	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private Map<String, Object> additionalProperties = new HashMap<>();
 
 	@JsonProperty("latitude")
 	public Double getLatitude() {

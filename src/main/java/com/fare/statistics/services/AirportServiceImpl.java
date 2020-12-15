@@ -45,6 +45,7 @@ public class AirportServiceImpl implements AirportService {
 	public Mono<Root> retrieveRoutes() {
 		String token = tokenGenerator.generateToken();
 		String uriString = UriComponentsBuilder.fromHttpUrl(resource).toUriString();
+		log.info("URI String URL: "+uriString);
 		WebClient.ResponseSpec responseSpec = client.get().uri(uriString).accept(MediaType.APPLICATION_STREAM_JSON)
 				.header(AUTHORIZATION, "Bearer " + token).retrieve();
 		return responseSpec.onStatus(HttpStatus::is5xxServerError, response -> Mono.just(new Exception("500 error!")))

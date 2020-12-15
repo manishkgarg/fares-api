@@ -33,7 +33,7 @@ public class Location {
 	@JsonProperty("parent")
 	private Parent parent;
 	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private Map<String, Object> additionalProperties = new HashMap<>();
 
 	@JsonProperty("code")
 	public String getCode() {

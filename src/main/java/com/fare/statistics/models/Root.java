@@ -29,7 +29,7 @@ public class Root {
 	@JsonProperty("page")
 	private Page page;
 	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private Map<String, Object> additionalProperties = new HashMap<>();
 
 	@JsonProperty("_embedded")
 	public Embedded getEmbedded() {
