@@ -2,6 +2,7 @@
 package com.fare.statistics.models;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -13,40 +14,28 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.Data;
 /**
- * This Model class is to bind with Coordinates details like latitude & longitude information.
+ * This Model class is to bind with list of locations received.
  * @author Manish
  *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "latitude", "longitude" })
+@JsonPropertyOrder({ "locations" })
 @Data
-public class Coordinates {
+public class Embedded {
 
-	@JsonProperty("latitude")
-	private Double latitude;
-	@JsonProperty("longitude")
-	private Double longitude;
+	@JsonProperty("locations")
+	private List<Location> locations = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-	@JsonProperty("latitude")
-	public Double getLatitude() {
-		return latitude;
+	@JsonProperty("locations")
+	public List<Location> getLocations() {
+		return locations;
 	}
 
-	@JsonProperty("latitude")
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	@JsonProperty("longitude")
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	@JsonProperty("longitude")
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
+	@JsonProperty("locations")
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
 	}
 
 	@JsonAnyGetter

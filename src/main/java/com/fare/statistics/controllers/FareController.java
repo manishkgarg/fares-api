@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fare.statistics.models.FareModel;
-import com.fare.statistics.models.Location;
 import com.fare.statistics.models.Request;
+import com.fare.statistics.models.Root;
 import com.fare.statistics.services.AirportService;
 import com.fare.statistics.services.FareService;
 
@@ -62,17 +62,16 @@ public class FareController {
 	}
 
 	/**
-	 * This particular method will provide the airport information based on
-	 * input code
+	 * This particular method will provide the airport information json in
+	 * details
 	 * 
-	 * @param code
 	 * @return location json
 	 */
 	@GetMapping("/fare-airports")
-	public Mono<Location> getAirportDetails(String code) {
+	public Mono<Root> getAirportDetails() {
 		UUID uuid = UUID.randomUUID();
-		log.info("fetching airport details for input code: " + code + " & unique id generated is: " + uuid);
-		return airportService.retrieveRoutes(code);
+		log.info("unique id generated for fetching airport details : " + uuid);
+		return airportService.retrieveRoutes();
 	}
 
 }

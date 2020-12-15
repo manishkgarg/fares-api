@@ -22,7 +22,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.fare.statistics.models.Location;
+import com.fare.statistics.models.Root;
 import com.fare.statistics.oauth.TokenGenerator;
 
 import reactor.core.publisher.Mono;
@@ -57,7 +57,7 @@ public class AirportServiceTest {
 		when(this.webClient.get().uri("http://localhost:8080/airports/yow")
 				.header("Authorization", tokenGenerator.generateToken()).accept(MediaType.APPLICATION_STREAM_JSON)
 				.retrieve()).thenReturn(createResponseSpec(HttpStatus.OK));
-		Mono<Location> result = airportService.retrieveRoutes("yow");
+		Mono<Root> result = airportService.retrieveRoutes();
 		assertNotNull("result must not be empty", result);
 	}
 

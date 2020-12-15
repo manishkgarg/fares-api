@@ -11,42 +11,44 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import lombok.Builder;
 import lombok.Data;
 /**
- * This Model class is to bind with Coordinates details like latitude & longitude information.
+ * This Model class is to bind root information.
  * @author Manish
  *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "latitude", "longitude" })
+@JsonPropertyOrder({ "_embedded", "page" })
+@Builder
 @Data
-public class Coordinates {
+public class Root {
 
-	@JsonProperty("latitude")
-	private Double latitude;
-	@JsonProperty("longitude")
-	private Double longitude;
+	@JsonProperty("_embedded")
+	private Embedded embedded;
+	@JsonProperty("page")
+	private Page page;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-	@JsonProperty("latitude")
-	public Double getLatitude() {
-		return latitude;
+	@JsonProperty("_embedded")
+	public Embedded getEmbedded() {
+		return embedded;
 	}
 
-	@JsonProperty("latitude")
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
+	@JsonProperty("_embedded")
+	public void setEmbedded(Embedded embedded) {
+		this.embedded = embedded;
 	}
 
-	@JsonProperty("longitude")
-	public Double getLongitude() {
-		return longitude;
+	@JsonProperty("page")
+	public Page getPage() {
+		return page;
 	}
 
-	@JsonProperty("longitude")
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
+	@JsonProperty("page")
+	public void setPage(Page page) {
+		this.page = page;
 	}
 
 	@JsonAnyGetter

@@ -13,7 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fare.statistics.models.FareModel;
-import com.fare.statistics.models.Location;
+import com.fare.statistics.models.Page;
+import com.fare.statistics.models.Root;
 import com.fare.statistics.services.AirportServiceImpl;
 import com.fare.statistics.services.FareServiceImpl;
 
@@ -42,8 +43,8 @@ public class FareControllerTest {
 
 	@Test
 	public void getAirportInformationBasedOnInputLocationCode() throws Exception {
-		when(airportService.retrieveRoutes("yow"))
-				.thenReturn(Mono.just(Location.builder().code("yow").name("Ottawa International").build()));
+		when(airportService.retrieveRoutes())
+				.thenReturn(Mono.just(Root.builder().page(Page.builder().size(250).build()).build()));
 		this.mockMvc.perform(get("/fare-airports").param("code", "yow")).andExpect(status().isOk());
 	}
 

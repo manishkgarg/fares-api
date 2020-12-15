@@ -3,7 +3,7 @@
  */
 package com.fare.statistics.services;
 
-import com.fare.statistics.models.Location;
+import com.fare.statistics.models.Root;
 
 import reactor.core.publisher.Mono;
 
@@ -13,6 +13,6 @@ import reactor.core.publisher.Mono;
  */
 public interface AirportService {
 
-	public Mono<Location> retrieveRoutes(String location);
+	public Mono<Root> retrieveRoutes();
 
 }

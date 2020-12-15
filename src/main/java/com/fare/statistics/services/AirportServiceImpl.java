@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fare.statistics.models.Location;
+import com.fare.statistics.models.Root;
 import com.fare.statistics.oauth.TokenGenerator;
 
 import reactor.core.publisher.Mono;
@@ -42,15 +42,13 @@ public class AirportServiceImpl implements AirportService {
 		client = WebClient.builder().baseUrl(resource).build();
 	}
 
-	public Mono<Location> retrieveRoutes(String location) {
+	public Mono<Root> retrieveRoutes() {
 		String token = tokenGenerator.generateToken();
-		String uriString = UriComponentsBuilder.fromHttpUrl(resource).path("/" + location).toUriString();
-		log.info("URI string: " + uriString);
+		String uriString = UriComponentsBuilder.fromHttpUrl(resource).toUriString();
 		WebClient.ResponseSpec responseSpec = client.get().uri(uriString).accept(MediaType.APPLICATION_STREAM_JSON)
 				.header(AUTHORIZATION, "Bearer " + token).retrieve();
-
 		return responseSpec.onStatus(HttpStatus::is5xxServerError, response -> Mono.just(new Exception("500 error!")))
-				.bodyToMono(Location.class).onErrorResume(WebClientResponseException.class,
+				.bodyToMono(Root.class).onErrorResume(WebClientResponseException.class,
 						ex -> ex.getRawStatusCode() == 404 ? Mono.empty() : Mono.error(ex));
 	}
 
