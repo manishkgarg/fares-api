@@ -24,6 +24,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fare.statistics.models.Root;
 import com.fare.statistics.oauth.TokenGenerator;
+import com.fare.statistics.repositories.APIStatsRepository;
 
 import reactor.core.publisher.Mono;
 
@@ -39,6 +40,9 @@ public class AirportServiceTest {
 	@Mock
 	private TokenGenerator tokenGenerator;
 
+	@Mock
+	private APIStatsRepository repository;
+	
 	@Before
 	public void setup() {
 		ReflectionTestUtils.setField(airportService, "resource", "http://localhost:8080/airports", String.class);

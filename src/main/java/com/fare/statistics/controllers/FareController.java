@@ -18,6 +18,7 @@ import com.fare.statistics.models.Request;
 import com.fare.statistics.models.Root;
 import com.fare.statistics.services.AirportService;
 import com.fare.statistics.services.FareService;
+import com.fare.statistics.services.StatisticsService;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
@@ -27,11 +28,19 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class FareController {
 
+	private static final String FARE_STATISTICS = "/fare-statistics";
+
+	private static final String FARE_AIRPORTS = "/fare-airports";
+
+	private static final String FARE_PRICE = "/fare-price";
+
 	private static final Logger log = LogManager.getLogger(FareController.class);
 
 	private final FareService fareService;
 
 	private final AirportService airportService;
+
+	private final StatisticsService statisticsService;
 
 	/**
 	 * This particular method will provide the fare information based on input
@@ -40,7 +49,7 @@ public class FareController {
 	 * @param request
 	 * @return fare
 	 */
-	@GetMapping("/fare-price")
+	@GetMapping(FARE_PRICE)
 	public Mono<FareModel> fetchRates(@Valid @ModelAttribute Request request) {
 		UUID uuid = UUID.randomUUID();
 		log.info("unique id generated is: " + uuid + " for origin: " + request.getOrigin() + " & destination: "
@@ -49,16 +58,16 @@ public class FareController {
 	}
 
 	/**
-	 * This method is to provide below statistics for given API.
+	 * This method is to provide API statistics.
 	 * 
-	 * @param API
 	 * @return count(Total number of requests processed), count(OK response
 	 *         status code), count(4xx response), count(5xx response),
 	 *         min(ResponseTime), max(ResponseTime) & average(ResponseTime).
 	 */
-	@GetMapping("/fare-statistics")
-	public ResponseEntity<String> provideApiStats(String apiName) {
-		return new ResponseEntity<>("", HttpStatus.OK);
+	@GetMapping(FARE_STATISTICS)
+	public ResponseEntity<String> provideApiStats() {
+		String result = statisticsService.getApiStats();
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
 	/**
@@ -67,10 +76,10 @@ public class FareController {
 	 * 
 	 * @return location json
 	 */
-	@GetMapping("/fare-airports")
+	@GetMapping(FARE_AIRPORTS)
 	public Mono<Root> getAirportDetails() {
 		UUID uuid = UUID.randomUUID();
-		log.info("unique id generated for fetching airport details : " + uuid);
+		log.info("Unique id generated for fetching airport details: {} " + uuid);
 		return airportService.retrieveRoutes();
 	}
 

@@ -40,7 +40,7 @@ public class TokenGenerator {
 	private String credentials;
 
 	@Value("${oauth.url}")
-	private String access_token_url;
+	private String oauthUrl;
 
 	public String generateToken() {
 
@@ -53,12 +53,12 @@ public class TokenGenerator {
 		headers.add(AUTHORIZATION, BASIC + encodedCredentials);
 		HttpEntity<String> request = new HttpEntity<>(headers);
 		try {
-			response = restTemplate.exchange(access_token_url, HttpMethod.POST, request, String.class);
+			response = restTemplate.exchange(oauthUrl, HttpMethod.POST, request, String.class);
 			AccessTokenResponse tokenResponse = mapper.readValue(response.getBody(), AccessTokenResponse.class);
-			log.info("Access Token response generated is {}" + tokenResponse);
+			log.info("Access Token response generated is:" + tokenResponse);
 			return tokenResponse.getAccess_token();
 		} catch (IOException e) {
-			log.error("Exception caught in TokenGenerator class {}" + e);
+			log.error("Exception caught in TokenGenerator class" + e);
 		}
 		return null;
 	}

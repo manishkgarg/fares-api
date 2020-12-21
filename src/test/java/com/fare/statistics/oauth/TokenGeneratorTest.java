@@ -37,7 +37,7 @@ public class TokenGeneratorTest {
 	@Before
 	public void setup() {
 		ReflectionTestUtils.setField(tokenGenerator, "credentials", "travel-api-client:psw", String.class);
-		ReflectionTestUtils.setField(tokenGenerator, "access_token_url",
+		ReflectionTestUtils.setField(tokenGenerator, "oauthUrl",
 				"http://localhost:8080/oauth/token?grant_type=client_credentials", String.class);
 		request = mock(HttpEntity.class);
 		response = mock(ResponseEntity.class);

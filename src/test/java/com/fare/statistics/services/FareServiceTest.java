@@ -24,6 +24,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fare.statistics.models.FareModel;
 import com.fare.statistics.oauth.TokenGenerator;
+import com.fare.statistics.repositories.APIStatsRepository;
 
 import reactor.core.publisher.Mono;
 
@@ -38,6 +39,9 @@ public class FareServiceTest {
 
 	@Mock
 	private TokenGenerator tokenGenerator;
+	
+	@Mock
+	private APIStatsRepository repository;
 
 	@Before
 	public void setup() {

@@ -17,6 +17,7 @@ import com.fare.statistics.models.Page;
 import com.fare.statistics.models.Root;
 import com.fare.statistics.services.AirportServiceImpl;
 import com.fare.statistics.services.FareServiceImpl;
+import com.fare.statistics.services.StatisticsServiceImpl;
 
 import reactor.core.publisher.Mono;
 
@@ -33,6 +34,9 @@ public class FareControllerTest {
 	@MockBean
 	private AirportServiceImpl airportService;
 
+	@MockBean
+	private StatisticsServiceImpl statisticsService;
+
 	@Test
 	public void getFareInformationBasedOnInputLocations() throws Exception {
 		when(fareService.retrieveRates("yow", "bba")).thenReturn(
@@ -48,4 +52,9 @@ public class FareControllerTest {
 		this.mockMvc.perform(get("/fare-airports").param("code", "yow")).andExpect(status().isOk());
 	}
 
+	@Test
+	public void getAPiStats() throws Exception {
+		when(statisticsService.getApiStats()).thenReturn("Ok");
+		this.mockMvc.perform(get("/fare-statistics")).andExpect(status().isOk());
+	}
 }
