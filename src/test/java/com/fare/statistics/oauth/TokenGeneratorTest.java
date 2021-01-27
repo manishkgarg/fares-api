@@ -47,7 +47,7 @@ public class TokenGeneratorTest {
 	@Test
 	public void testTokenGenerator() throws IOException {
 		AccessTokenResponse accessTokenResponse = new AccessTokenResponse();
-		accessTokenResponse.setAccess_token("dnkdnkjd-6bd77-djnid78-djbjhd7-jhbddhdjbjdbh");
+		accessTokenResponse.setAccessToken("dnkdnkjd-6bd77-djnid78-djbjhd7-jhbddhdjbjdbh");
 		when(this.restTemplate.exchange("http://localhost:8080/oauth/token?grant_type=client_credentials",
 				HttpMethod.POST, request, String.class)).thenReturn(response);
 		when(mapper.readValue(response.getBody(), AccessTokenResponse.class)).thenReturn(accessTokenResponse);

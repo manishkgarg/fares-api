@@ -56,10 +56,11 @@ public class FareServiceImpl implements FareService {
 
 		String uriString = UriComponentsBuilder.fromHttpUrl(resource).path("/" + origin).path("/" + destination)
 				.toUriString();
+		log.info("hit URI string is {}", uriString);
 
 		WebClient.ResponseSpec responseSpec = client.get().uri(uriString).accept(MediaType.APPLICATION_STREAM_JSON)
 				.header(AUTHORIZATION, "Bearer " + token).retrieve();
-		
+
 		LocalDateTime after = LocalDateTime.now();
 		Long diff = ChronoUnit.SECONDS.between(now, after);
 

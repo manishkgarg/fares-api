@@ -52,8 +52,8 @@ public class FareController {
 	@GetMapping(FARE_PRICE)
 	public Mono<FareModel> fetchRates(@Valid @ModelAttribute Request request) {
 		UUID uuid = UUID.randomUUID();
-		log.info("unique id generated is: " + uuid + " for origin: " + request.getOrigin() + " & destination: "
-				+ request.getDestination());
+		log.info("Unique id generated for combnation origin {} and destination {} is {}", request.getOrigin(),
+				request.getDestination(), uuid);
 		return fareService.retrieveRates(request.getOrigin(), request.getDestination());
 	}
 
@@ -79,7 +79,7 @@ public class FareController {
 	@GetMapping(FARE_AIRPORTS)
 	public Mono<Root> getAirportDetails() {
 		UUID uuid = UUID.randomUUID();
-		log.info("Unique id generated for fetching airport details: {} " + uuid);
+		log.info("Unique id generated for fetching airport details is {}", uuid);
 		return airportService.retrieveRoutes();
 	}
 

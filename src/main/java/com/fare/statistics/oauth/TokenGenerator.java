@@ -55,10 +55,10 @@ public class TokenGenerator {
 		try {
 			response = restTemplate.exchange(oauthUrl, HttpMethod.POST, request, String.class);
 			AccessTokenResponse tokenResponse = mapper.readValue(response.getBody(), AccessTokenResponse.class);
-			log.info("Access Token response generated is:" + tokenResponse);
-			return tokenResponse.getAccess_token();
+			log.info("Access Token response generated is: {}" , tokenResponse);
+			return tokenResponse.getAccessToken();
 		} catch (IOException e) {
-			log.error("Exception caught in TokenGenerator class" + e);
+			log.error("IOException caught in TokenGenerator class {}", 1);
 		}
 		return null;
 	}
