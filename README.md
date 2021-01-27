@@ -74,4 +74,3 @@ Mocked URL
 Post http://localhost:8080/oauth/token?grant_type=client_credentials
 HTTP Headers parameters 
 Authorization: Basic dHJhdmVsLWFwaS1jbGllbnQ6cHN3
-

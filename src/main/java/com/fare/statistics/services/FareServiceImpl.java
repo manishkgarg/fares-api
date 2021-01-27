@@ -60,7 +60,6 @@ public class FareServiceImpl implements FareService {
 
 		WebClient.ResponseSpec responseSpec = client.get().uri(uriString).accept(MediaType.APPLICATION_STREAM_JSON)
 				.header(AUTHORIZATION, "Bearer " + token).retrieve();
-
 		LocalDateTime after = LocalDateTime.now();
 		Long diff = ChronoUnit.SECONDS.between(now, after);
 

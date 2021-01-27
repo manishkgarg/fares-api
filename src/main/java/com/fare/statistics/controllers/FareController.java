@@ -65,7 +65,7 @@ public class FareController {
 	 *         min(ResponseTime), max(ResponseTime) & average(ResponseTime).
 	 */
 	@GetMapping(FARE_STATISTICS)
-	public ResponseEntity<String> provideApiStats() {
+	public ResponseEntity<String> getApiStatistics() {
 		String result = statisticsService.getApiStats();
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
